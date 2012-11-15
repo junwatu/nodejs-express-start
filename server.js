@@ -1,14 +1,20 @@
 // server.js
-var express=require("express");
-var app=express();
+var express = require("express");
+var cons    = require('consolidate');
+var app = express();
 
 app.configure(function(){
 	app.use(express.logger());
+	app.use(express.static(__dirname + '/app'));
+	
+	app.engine('html',cons.underscore);
+	app.set('view engine', 'html');
+
 	app.set('PORT',3000);
 });
 
 app.get("/",function(req,res){
-	res.send("<h3>Welcome, This Is Express Delivery! :)</h3>");
+	res.render('index');
 });
 
 app.listen(app.get('PORT'));
