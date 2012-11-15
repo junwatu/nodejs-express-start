@@ -1,6 +1,6 @@
 {
 	"name": "nodejs-express-yeoman",
-	"description": "Web app with Express and Yeoman",
+	"description": "Web app with Express",
 	"version": "0.0.1",
 	"private": "true",
 	"dependencies": {
