@@ -1,8 +1,15 @@
 // server.js
-var http=require("http");
-http.createServer(function(request,response){
-	response.writeHead(200,{"Content-Type":"text/plain"});
-	response.write("Tidak Menyesal Belajar JavaScript! :)");
-	response.end();
-}).listen(3000);
-console.log("Server listening on port 3000...");
+var express=require("express");
+var app=express();
+
+app.configure(function(){
+	app.use(express.logger());
+	app.set('PORT',3000);
+});
+
+app.get("/",function(req,res){
+	res.send("<h3>Welcome, This Is Express Delivery! :)</h3>");
+});
+
+app.listen(app.get('PORT'));
+console.log("Server berjalan pada port "+app.get('PORT')+"...");
