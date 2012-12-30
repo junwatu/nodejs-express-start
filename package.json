@@ -1,11 +1,19 @@
 {
-	"name": "nodejs-express-underscore",
-	"description": "Web app with Express and Underscore",
+	"name": "nodejs-express-mongodb",
+	"description": "Simple Login Registration App",
 	"version": "0.0.1",
 	"private": "true",
 	"dependencies": {
 		"express": "3.0.x",
-		"consolidate" : "0.5.x",
-		"underscore" : "1.4.x"
+		"consolidate": "0.5.x",
+		"underscore": "1.4.x",
+		"mongoose": "3.4.x"
+	},
+	"subdomain": "junwatu.node-express",
+	"scripts": {
+		"start": "node server"
+	},
+	"engines": {
+		"node": "0.8.x"
 	}
 }
