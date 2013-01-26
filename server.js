@@ -104,6 +104,7 @@ app.post('/user/login', function (req, res) {
     User.find({username:req.body.username, password:req.body.password}, function (err, user) {
 
         if (user.length > 0) {
+            console.log('User Data:\n');
             console.log(user);
 
             res.render('user/home', {user:user[0]});
@@ -117,6 +118,17 @@ app.post('/user/login', function (req, res) {
     });
 });
 
+app.param('name', function (req, res, next, name) {
+    User.find({username:name}, function (err, user) {
+        req.user = user[0];
+        console.log(user);
+        next();
+    });
+})
+
+app.get("/user/:name", function (req, res) {
+    res.render('user/home', {user:req.user});
+})
 
 // CREATE USER
 app.post("/user/create", function (req, res) {
@@ -129,9 +141,9 @@ app.post("/user/create", function (req, res) {
 
     user.save(function (err, user) {
         if (err) res.json(err)
-        res.end('Registration '+user.username +' Ok!');
+        //res.end('Registration '+user.username +' Ok!');
 
-        //res.redirect('/user/' + user.username);
+        res.redirect('/user/' + user.username);
     });
 });
 
