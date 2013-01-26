@@ -15,3 +15,7 @@ header p {
 header h4 {
     color: red;
 }
+
+#regForm {
+    max-width: 200px;
+}
