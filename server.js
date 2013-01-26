@@ -94,6 +94,10 @@ app.get("/", function (req, res) {
     });
 });
 
+// REGISTRATION
+app.get('/user/registration', function (req, res) {
+    res.render("user/registration");
+});
 
 // AUTHENTICATION
 app.post('/user/login', function (req, res) {
