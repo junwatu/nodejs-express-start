@@ -115,7 +115,25 @@ app.post('/user/login', function (req, res) {
             });
         }
     });
-})
+});
+
+
+// CREATE USER
+app.post("/user/create", function (req, res) {
+
+    var user = new User({
+        username:req.body.username,
+        password:req.body.password,
+        email:req.body.email
+    });
+
+    user.save(function (err, user) {
+        if (err) res.json(err)
+        res.end('Registration '+user.username +' Ok!');
+
+        //res.redirect('/user/' + user.username);
+    });
+});
 
 app.listen(app.get('PORT'));
 console.log('NodeStar');
