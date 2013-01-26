@@ -6,14 +6,6 @@
 	"dependencies": {
 		"express": "3.0.x",
 		"consolidate": "0.5.x",
-		"underscore": "1.4.x",
-		"mongoose": "3.4.x"
-	},
-	"subdomain": "junwatu.node-express",
-	"scripts": {
-		"start": "node server"
-	},
-	"engines": {
-		"node": "0.8.x"
+		"underscore": "1.4.x"
 	}
 }
