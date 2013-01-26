@@ -94,6 +94,25 @@ app.get("/", function (req, res) {
     });
 });
 
+
+// AUTHENTICATION
+app.post('/user/login', function (req, res) {
+    User.find({username:req.body.username, password:req.body.password}, function (err, user) {
+
+        if (user.length > 0) {
+            console.log(user);
+
+            res.render('user/home', {user:user[0]});
+        } else {
+            console.log('ERROR: Wrong Username or Password');
+            res.render('index', {
+                title:apptitle,
+                message:'Wrong username or password!'
+            });
+        }
+    });
+})
+
 app.listen(app.get('PORT'));
 console.log('NodeStar');
 console.log("Server Port: " + app.get('PORT'));
