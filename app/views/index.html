@@ -3,12 +3,22 @@
 <head>
     <title>NodeStar</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="css/site.css">
+    <link rel="stylesheet" href="/css/site.css">
 </head>
 <body>
-    <header>
-        <h2><%= title %></h2>
-        <p><%= description %></a></p>
-    </header>
+<header>
+    <h2><%= title %></h2>
+    <h4><%= message %></h4>
+</header>
+<div id="login" style="max-width:200px;">
+
+    <form action="/user/login" method="POST">
+        <label for="username">Username</label>
+        <input type="input" id="username">
+        <label for="password">Password</label>
+        <input type="input" id="password">
+        <input type="submit" value="Login" name="Submit">
+    </form>
+</div>
 </body>
 </html>
