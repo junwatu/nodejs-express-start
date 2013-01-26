@@ -24,8 +24,7 @@ var express = require("express"),
         username:'string',
         password:'string',
         email:'string'
-    }),
-    User = db.model('users', UserSchema);
+    });
 
 app.configure(function () {
     app.use(express.logger());
@@ -75,7 +74,8 @@ app.configure(function () {
  * MongoDB connection using Mongoose
  */
 
-var db = mongoose.createConnection(app.get('MONGODB_CONN'));
+var db = mongoose.createConnection(app.get('MONGODB_CONN')),
+    User = db.model('users', UserSchema);
 
 db.on('connected', function () {
     console.log('Aplikasi terhubung dengan database.');
