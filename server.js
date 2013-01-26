@@ -12,12 +12,27 @@
 var express = require("express"),
     engines = require('consolidate'),
     app = express(),
-    url = require('url');
     mongoose = require('mongoose'),
-    dbmessage = '';
+    dbmessage = '',
+    apptitle = 'NodeJs Login Registration',
+
+/*
+ * UserSchema
+ *
+ */
+    UserSchema = new mongoose.Schema({
+        username:'string',
+        password:'string',
+        email:'string'
+    }),
+    User = db.model('users', UserSchema);
 
 app.configure(function () {
     app.use(express.logger());
+    app.use(express.bodyParser());
+    app.use(express.methodOverride());
+
+    app.use(express.cookieParser());
 
     app.use(express.static(__dirname + '/app'));
 
@@ -72,16 +87,11 @@ db.on('error', function () {
     dbmessage = 'Koneksi ke MongoDB error!';
 });
 
-//====================================
-
 app.get("/", function (req, res) {
     res.render('index', {
-        title:'NodeStar',
-        description:dbmessage,
+        title: apptitle,
         message:''
     });
-
-    console.log(url.parse(req.url));
 });
 
 app.listen(app.get('PORT'));
