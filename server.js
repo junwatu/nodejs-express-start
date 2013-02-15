@@ -15,16 +15,17 @@ var express = require("express"),
     mongoose = require('mongoose'),
     dbmessage = '',
     apptitle = 'NodeJs Login Registration',
+    MemoryStore = require('connect').session.MemoryStore;
 
 /*
  * UserSchema
  *
  */
-    UserSchema = new mongoose.Schema({
-        username:'string',
-        password:'string',
-        email:'string'
-    });
+UserSchema = new mongoose.Schema({
+    username:'string',
+    password:'string',
+    email:'string'
+});
 
 app.configure(function () {
     app.use(express.logger());
@@ -32,7 +33,8 @@ app.configure(function () {
     app.use(express.methodOverride());
 
     app.use(express.cookieParser());
-
+    app.use(express.session(
+        {secret:"SocialNet secret key", store:new MemoryStore()}));
     app.use(express.static(__dirname + '/app'));
 
     app.engine('html', engines.underscore);
@@ -45,14 +47,14 @@ app.configure(function () {
     app.set('PORT', 3000);
 
     // MongoDB for development
-    app.set('MONGODB_DEV','mongodb://localhost/contacts');
+    app.set('MONGODB_DEV', 'mongodb://localhost/contacts');
 
     /**
      * MongoDB for production
      *
      * HardCode for demo purpose only
      */
-    app.set('MONGODB_PROD','mongodb://usernam:password@domainmu.com:212/contacts');
+    app.set('MONGODB_PROD', 'mongodb://usernam:password@domainmu.com:212/contacts');
 
     /**
      * NODE_ENV=development
@@ -89,7 +91,7 @@ db.on('error', function () {
 
 app.get("/", function (req, res) {
     res.render('index', {
-        title: apptitle,
+        title:apptitle,
         message:''
     });
 });
@@ -107,7 +109,7 @@ app.post('/user/login', function (req, res) {
             console.log('User Data:\n');
             console.log(user);
 
-            res.session.loggedIn = true;
+            req.session.loggedIn = true;
 
             res.render('user/home', {user:user[0]});
         } else {
@@ -129,10 +131,13 @@ app.param('name', function (req, res, next, name) {
 })
 
 app.get("/user/:name", function (req, res) {
-    if(req.session.loggedIn){
+    if (req.session.loggedIn) {
         res.render('user/home', {user:req.user});
-    }else {
-        res.render('index');
+    } else {
+        res.render('index', {
+            title:apptitle,
+            message:''
+        });
     }
 })
 
@@ -151,6 +156,15 @@ app.post("/user/create", function (req, res) {
 
         res.redirect('/user/' + user.username);
     });
+});
+
+
+// LOGOUT
+app.get('/logout', function (req, res) {
+    req.session.loggedIn = false;
+    res.render('index',{
+        title:apptitle,
+        message:''});
 });
 
 app.listen(app.get('PORT'));
