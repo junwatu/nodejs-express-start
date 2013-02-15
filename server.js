@@ -107,6 +107,8 @@ app.post('/user/login', function (req, res) {
             console.log('User Data:\n');
             console.log(user);
 
+            res.session.loggedIn = true;
+
             res.render('user/home', {user:user[0]});
         } else {
             console.log('ERROR: Wrong Username or Password');
@@ -127,7 +129,11 @@ app.param('name', function (req, res, next, name) {
 })
 
 app.get("/user/:name", function (req, res) {
-    res.render('user/home', {user:req.user});
+    if(req.session.loggedIn){
+        res.render('user/home', {user:req.user});
+    }else {
+        res.render('index');
+    }
 })
 
 // CREATE USER
