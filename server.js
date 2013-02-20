@@ -14,7 +14,7 @@ var express = require("express"),
     app = express(),
     mongoose = require('mongoose'),
     dbmessage = '',
-    apptitle = 'Node-Express-MongoDB Login Registration App',
+    apptitle = 'NodeApp',
     MemoryStore = require('connect').session.MemoryStore,
 
 /*
