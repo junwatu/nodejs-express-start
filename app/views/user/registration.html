@@ -1,24 +1,84 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>NodeStar</title>
+    <title>Node App</title>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/bootstrap-responsive.css">
     <link rel="stylesheet" href="/css/site.css">
 </head>
 <body>
-<header>
-    <h2>Registration Form</h2>
-</header>
-<div id="regForm">
-<form action="/user/create" method="POST">
-	<label for="username_input">Username</label>
-	<input type="text" id="username_input" name="username">
-	<label for="email_input">Email</label>
-	<input type="text" id="email_input" name="email">
-	<label for="password_input">Password</label>
-	<input type="text" id="password_input" name="password">
-	<input type="submit" name="Submit" value="Register">
-</form>
+<div class="navbar navbar-fixed-top navbar-inverse">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="brand"><%= title %></a>
+
+            <div class="nav-collapse"><!-- Other nav bar content -->
+
+                <!-- The drop down menu -->
+                <ul class="nav pull-right">
+                    <li><a href="/user/registration">Sign Up</a></li>
+                    <li class="divider-vertical"></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong
+                                class="caret"></strong></a>
+
+                        <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
+                            <!-- Login form here -->
+                            <form action="/user/login" method="POST">
+
+                                <input class="input-large" name="username" type="text" id="username" placeholder="Username">
+
+                                <input class="input-large" name="password" type="password" id="password" placeholder="Password">
+
+                                <button type="submit" class="btn btn-primary">Sign in</button>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
+<div class="container">
+
+    <div class="hero-unit reg=header">
+        <h4>Registration Form</h4>
+    </div>
+
+    <div id="regForm">
+
+        <form action="/user/create" method="POST" class="form-horizontal">
+            <div class="control-group">
+                <label class="control-label" for="username_input">Username</label>
+
+                <div class="controls">
+                    <input type="text" id="username_input" name="username">
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="email_input" class="control-label" for="email_input">Email</label>
+
+                <div class="controls">
+                    <input type="text" id="email_input" name="email">
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="password_input" for="password_input" class="control-label">Password</label>
+
+                <div class="controls">
+                    <input type="text" id="password_input" name="password">
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <input type="submit" name="Submit" value="Register" class="btn">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 </body>
 </html>
