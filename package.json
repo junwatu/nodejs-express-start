@@ -1,6 +1,6 @@
 {
-	"name": "nodestar",
-	"description": "Simple login registration app using express, underscore & mongodb",
+	"name": "node-express-mongodb-login-registration",
+	"description": "Simple login registration app using express & mongodb",
 	"version": "0.0.1",
 	"private": "true",
 	"dependencies": {
@@ -11,7 +11,7 @@
         "jade": ">= 0.0.1",
         "connect":">= 1.9.1"
 	},
-	"subdomain": "nodestar.junwatu",
+	"subdomain": "nodeapps.junwatu",
 	"scripts": {
 		"start": "node server"
 	},
