@@ -1,2 +1,28 @@
-<h2>Welcome, <%= user.username %></h2>
-<a href="/logout">Logout</a>
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Node App</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/bootstrap-responsive.css">
+    <link rel="stylesheet" href="/css/site.css">
+</head>
+<body>
+<div class="navbar navbar-fixed-top navbar-inverse">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="brand"><%= title %></a>
+            <ul class="nav pull-right">
+                <li><a  href="/logout">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container" id="main">
+    <div class="hero-unit">
+        <h4>Welcome, <%= user.username %></h4>
+    </div>
+</div>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+</body>
+</html>
