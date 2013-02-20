@@ -1,6 +1,6 @@
-== NodeStar ==
+== NodeApp ==
 
-Koneksi NodeJs dengan MongoDB menggunakan Mongoose.
+Koneksi NodeJs dengan MongoDB menggunakan Mongoose dengan Bootstrap style buat UI-nya.
 
 Instalasi
 
