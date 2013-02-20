@@ -1,21 +1,13 @@
-body {
-    margin: 30px 30px;
-}
-
-header h2 {
-    margin: 0px 0px 20px 0px;
-}
-header p {
-    margin: 0px;
-    padding: 3px;
-    font-size: 14px;
-    color: grey;
-}
-
-header h4 {
-    color: red;
+#main {
+    margin-top: 110px;
 }
 
 #regForm {
-    max-width: 150px;
+    margin-top: 30px;
+}
+
+.hero-unit {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 60px;
 }
