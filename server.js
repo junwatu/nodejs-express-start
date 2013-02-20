@@ -14,8 +14,8 @@ var express = require("express"),
     app = express(),
     mongoose = require('mongoose'),
     dbmessage = '',
-    apptitle = 'NodeJs Login Registration',
-    MemoryStore = require('connect').session.MemoryStore;
+    apptitle = 'Node-Express-MongoDB Login Registration App',
+    MemoryStore = require('connect').session.MemoryStore,
 
 /*
  * UserSchema
@@ -34,7 +34,7 @@ app.configure(function () {
 
     app.use(express.cookieParser());
     app.use(express.session(
-        {secret:"SocialNet secret key", store:new MemoryStore()}));
+        {secret:"secret key", store:new MemoryStore()}));
     app.use(express.static(__dirname + '/app'));
 
     app.engine('html', engines.underscore);
@@ -80,8 +80,8 @@ var db = mongoose.createConnection(app.get('MONGODB_CONN')),
     User = db.model('users', UserSchema);
 
 db.on('connected', function () {
-    console.log('Aplikasi terhubung dengan database.');
-    dbmessage = 'Aplikasi terhubung dengan database.';
+    console.log('Aplikasi terhubung dengan database MongoDB.');
+    dbmessage = 'Aplikasi terhubung dengan database MongoDB.';
 });
 
 db.on('error', function () {
@@ -98,11 +98,12 @@ app.get("/", function (req, res) {
 
 // REGISTRATION
 app.get('/user/registration', function (req, res) {
-    res.render("user/registration");
+    res.render("user/registration", {title:apptitle});
 });
 
 // AUTHENTICATION
 app.post('/user/login', function (req, res) {
+
     User.find({username:req.body.username, password:req.body.password}, function (err, user) {
 
         if (user.length > 0) {
@@ -111,12 +112,15 @@ app.post('/user/login', function (req, res) {
 
             req.session.loggedIn = true;
 
-            res.render('user/home', {user:user[0]});
+            res.render('user/home', {
+                user:user[0],
+                title:apptitle
+            });
         } else {
             console.log('ERROR: Wrong Username or Password');
             res.render('index', {
                 title:apptitle,
-                message:'Wrong username or password!'
+                message:'<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">&times;</button><h4>Error!</h4>Wrong username or password</div>'
             });
         }
     });
@@ -132,7 +136,10 @@ app.param('name', function (req, res, next, name) {
 
 app.get("/user/:name", function (req, res) {
     if (req.session.loggedIn) {
-        res.render('user/home', {user:req.user});
+        res.render('user/home', {
+            user:req.user,
+            title: apptitle
+        });
     } else {
         res.render('index', {
             title:apptitle,
@@ -153,7 +160,7 @@ app.post("/user/create", function (req, res) {
     user.save(function (err, user) {
         if (err) res.json(err)
         //res.end('Registration '+user.username +' Ok!');
-
+        req.session.loggedIn = true;
         res.redirect('/user/' + user.username);
     });
 });
@@ -161,6 +168,7 @@ app.post("/user/create", function (req, res) {
 
 // LOGOUT
 app.get('/logout', function (req, res) {
+    // clear user session
     req.session.loggedIn = false;
     res.render('index',{
         title:apptitle,
@@ -168,5 +176,6 @@ app.get('/logout', function (req, res) {
 });
 
 app.listen(app.get('PORT'));
-console.log('NodeStar');
+console.log('Node-Express-MongoDB Login Registration App');
+console.log('-------------------------------------------');
 console.log("Server Port: " + app.get('PORT'));
