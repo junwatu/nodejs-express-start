@@ -1,6 +1,6 @@
 {
-	"name": "nodejs-express-mongodb",
-	"description": "Simple Login Registration App",
+	"name": "nodejs-express-start",
+	"description": "Node.js with Express framework and underscore template",
 	"version": "0.0.1",
 	"private": "true",
 	"dependencies": {
